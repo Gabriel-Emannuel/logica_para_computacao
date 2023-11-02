@@ -1,0 +1,22 @@
+Tarefa: Projetar uma Plataforma de Mídia Social Simples
+
+Entrega: grupo de até três (3) integrantes
+
+Descrição: Você deve projetar uma especificação simplificada de uma plataforma de mídia social usando o Alloy Analyzer. A plataforma de mídia social deve suportar perfis de usuário, conexões de amizade e publicação de conteúdo de texto. As seguintes restrições devem ser seguidas:
+
+1) Um usuário pode ter mais de um perfil. Perfis e usuários podem estar ativos ou inativos.
+2) Conexões de amizade entre os usuários devem ser estabelecidas. O sistema deve ter um histórico das conexões atuais e apagadas.
+3) Um usuário pode publicar conteúdo de texto em seu perfil ou nos perfis de seus amigos.
+
+A especificação Alloy deve representar esses recursos e capturar as relações entre usuários, amizades e postagens. Além disso, devem existir restrições para garantir que o modelo seja bem definido e satisfaça certas propriedades (por exemplo, os usuários não podem ser amigos de si mesmos, as postagens devem estar associadas a usuários ativos, etc.).
+
+Diretrizes de Envio:
+
+1) Envie um arquivo de modelo Alloy (.als) que defina claramente as assinaturas e restrições.
+2) Defina casos de teste (assert/checks) para as propriedades mais importantes do sistema
+
+Sinta-se à vontade para fazer suposições razoáveis, conforme necessário, para simplificar o modelo.
+
+OBS: indique no campo de texto o nome dos integrantes da equipe, além do perfil Moodle que está enviando a resposta.
+
+O questionário será fechado em segunda, 6 Nov 2023, 23:59

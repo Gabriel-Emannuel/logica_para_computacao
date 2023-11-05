@@ -1,4 +1,4 @@
-// Tipos de usuários
+// Tipos
 
 abstract sig Amizade {
     amigo: one Perfil,
@@ -157,7 +157,6 @@ fact { // Se duas amizades contém os mesmos perfis, então são as mesmas amiza
 }
 
 ---
-
 // Asserts e checks
 
 assert user_with_more_than_one_profile {

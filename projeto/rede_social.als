@@ -110,7 +110,7 @@ fact { // Um usuário inativo não é ativo.
 
 ---
 
-// fatos sobre amizade
+// Fatos sobre amizade
 
 pred eh_amigo[perfil_1, perfil_2 : Perfil] {
     perfil_1 in perfil_2.amigos
@@ -156,4 +156,17 @@ fact { // Se duas amizades contém os mesmos perfis, então são as mesmas amiza
     ) => amizade_1 = amizade_2
 }
 
-run { #MidiaSocial=1}
+---
+
+// Asserts e checks
+
+assert user_with_more_than_one_profile {
+    some u: Usuario | one p1: Perfil | one p2: Perfil | 
+    p1 not = p2 and p1 in u.perfis and p2 in u.perfis and #MidiaSocial=1
+}
+
+check user_with_more_than_one_profile {}
+
+---
+
+run {#MidiaSocial=1}

@@ -1,4 +1,4 @@
-// Tipos de usuários
+// Tipos
 
 abstract sig Amizade {
     amigo: one Perfil,
@@ -158,6 +158,7 @@ fact { // Se duas amizades contém os mesmos perfis, então são as mesmas amiza
 
 ---
 
+<<<<<<< HEAD
 // Asserts e checks
 
 assert user_with_more_than_one_profile {
@@ -170,3 +171,38 @@ check user_with_more_than_one_profile {}
 ---
 
 run {#MidiaSocial=1}
+=======
+// fatos para quaisquer mídia social ser independente e não ter conexões entre sí
+
+fact {
+    all perfil_1, perfil_2 : Perfil | one usuario_1, usuario_2: Usuario | one midia: MidiaSocial |
+    
+    // se perfil_1 e perfil_2 serem amigos e serem de usuários diferentes, então esses usuários são da mesma mídia social
+    (
+        eh_amigo[perfil_1, perfil_2] and (
+            usuario_1 != usuario_2 => (
+                perfil_1 in usuario_1.perfis 
+                and perfil_2 in usuario_2.perfis
+            ) 
+        )
+    ) => (
+        (usuario_1 + usuario_2) in midia.usuarios
+    )
+}
+
+fact {
+    all amizade: Amizade | all perfil_1, perfil_2: Perfil | one usuario_1, usuario_2: Usuario | one midia: MidiaSocial |
+
+    (
+        amizade_contem[amizade, perfil_1, perfil_2] and (
+            usuario_1 != usuario_2 => (
+                perfil_1 in usuario_1.perfis
+                and perfil_2 in usuario_2.perfis
+            )
+        )
+    ) => (
+        (usuario_1 + usuario_2) in midia.usuarios
+    )
+}
+run { #MidiaSocial=1}
+>>>>>>> 972e609e666bfb28516b9a2856d89d28afa1063a

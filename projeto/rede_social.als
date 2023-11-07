@@ -157,6 +157,7 @@ fact { // Se duas amizades contém os mesmos perfis, então são as mesmas amiza
 }
 
 ---
+
 // Asserts e checks
 
 assert historico_depende_de_midia_social {
@@ -197,3 +198,54 @@ check conteudo_to_publicacao {}
 check user_mais_de_um_perfil {}
 ---
 run {#MidiaSocial=1}
+=======
+
+<<<<<<< HEAD
+// Asserts e checks
+
+assert user_with_more_than_one_profile {
+    some u: Usuario | one p1: Perfil | one p2: Perfil | 
+    p1 not = p2 and p1 in u.perfis and p2 in u.perfis and #MidiaSocial=1
+}
+
+check user_with_more_than_one_profile {}
+
+---
+
+run {#MidiaSocial=1}
+=======
+// fatos para quaisquer mídia social ser independente e não ter conexões entre sí
+
+fact {
+    all perfil_1, perfil_2 : Perfil | one usuario_1, usuario_2: Usuario | one midia: MidiaSocial |
+    
+    // se perfil_1 e perfil_2 serem amigos e serem de usuários diferentes, então esses usuários são da mesma mídia social
+    (
+        eh_amigo[perfil_1, perfil_2] and (
+            usuario_1 != usuario_2 => (
+                perfil_1 in usuario_1.perfis 
+                and perfil_2 in usuario_2.perfis
+            ) 
+        )
+    ) => (
+        (usuario_1 + usuario_2) in midia.usuarios
+    )
+}
+
+fact {
+    all amizade: Amizade | all perfil_1, perfil_2: Perfil | one usuario_1, usuario_2: Usuario | one midia: MidiaSocial |
+
+    (
+        amizade_contem[amizade, perfil_1, perfil_2] and (
+            usuario_1 != usuario_2 => (
+                perfil_1 in usuario_1.perfis
+                and perfil_2 in usuario_2.perfis
+            )
+        )
+    ) => (
+        (usuario_1 + usuario_2) in midia.usuarios
+    )
+}
+run { #MidiaSocial=1}
+>>>>>>> 972e609e666bfb28516b9a2856d89d28afa1063a
+>>>>>>> 9c734c92b96ab9170526204401b7754370d698c1

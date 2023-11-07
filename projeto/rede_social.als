@@ -159,13 +159,41 @@ fact { // Se duas amizades contém os mesmos perfis, então são as mesmas amiza
 ---
 // Asserts e checks
 
-assert user_with_more_than_one_profile {
-    some u: Usuario | one p1: Perfil | one p2: Perfil | 
-    p1 not = p2 and p1 in u.perfis and p2 in u.perfis and #MidiaSocial=1
+assert historico_depende_de_midia_social {
+    one hist: Historico | all midia: MidiaSocial | hist != midia.historico
 }
 
-check user_with_more_than_one_profile {}
+assert amizade_not_self_loop {
+    all a: Amizade | a.amigo != a.de
+}
 
+assert perfil_ativo_usuario_ativo {
+    all p:PerfilAtivo | one u:UsuarioAtivo | p in u.perfis
+}
+
+assert perfil_inativo_usuario_inativo {
+    all p:PerfilInativo | one u:UsuarioInativo | p in u.perfis
+}
+
+assert perfil_usuario {
+    all p: Perfil | one u: Usuario | p in u.perfis
+}
+
+assert conteudo_to_publicacao{
+    all c: Conteudo | some p: Publicacao | p.conteudo = c
+}
+
+assert user_mais_de_um_perfil {
+    lone u: Usuario | one p1: Perfil | one p2: Perfil | 
+    p1 not = p2 and p1 in u.perfis and p2 in u.perfis
+}
+
+check historico_depende_de_midia_social {}
+check amizade_not_self_loop {}
+check perfil_ativo_usuario_ativo {}
+check perfil_inativo_usuario_inativo {}
+check perfil_usuario {}
+check conteudo_to_publicacao {}
+check user_mais_de_um_perfil {}
 ---
-
 run {#MidiaSocial=1}
